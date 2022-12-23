@@ -9,6 +9,12 @@ class Router {
         const LoginRouteUseCase = require("../middlerwares/LoginMiddleware.usecase")
         const loginRouteUseCase = new LoginRouteUseCase()
 
+        const AdminLoginRouteUseCase = require("../middlerwares/AdminLoginMiddleware.usecase")
+        const adminLoginRouteUseCase = new AdminLoginRouteUseCase()
+
+        const ChangePasswordRouteUseCase = require("../middlerwares/ChangePasswordMiddleware.usecase")
+        const changePasswordRouteUseCase = new ChangePasswordRouteUseCase()
+
         const DesativateAccount = require('./routes/admins-routes/desativateAccount.route')
         const InsertAdmin = require('./routes/admins-routes/insertAdmin.route')
         const InsertQuestion = require('./routes/admins-routes/insertQuestions.route')
@@ -70,13 +76,15 @@ class Router {
         httpServer.get('/admin/update_question', updateQuestion.route)
         httpServer.get('/admin/view_question', viewQuestion.route)
 
-        httpServer.get('/authentication/change_password', changePassword.route)
 
+        httpServer.use('/authentication/change_password', changePasswordRouteUseCase.validate)
+        httpServer.post('/authentication/change_password', changePassword.route)
         httpServer.use('/authentication/login', loginRouteUseCase.validate)
         httpServer.post('/authentication/login', login.route)
         httpServer.use('/authentication/register', registerMiddleware.validate)
         httpServer.post('/authentication/register', register.route)
-        httpServer.get('/authentication/validate_admin', validateAdmin.route)
+        httpServer.use('/authentication/validate_admin', adminLoginRouteUseCase.validate)
+        httpServer.post('/authentication/validate_admin', validateAdmin.route)
         httpServer.post('/authentication/validate_admin_token', validateAdminToken.route)
         httpServer.post('/authentication/validate_token', validateToken.route)
 
