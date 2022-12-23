@@ -4,6 +4,7 @@ const configuration = require("../configurations/configurations.json")
 class Token {
     constructor() {
         this.tokenPassword = configuration.token.password
+        this.tokenPasswordAdmin = configuration.token.passwordAdmin
     }
 
     async signToken(object, expires) {
@@ -15,6 +16,15 @@ class Token {
     async verifyToken(token) {
         try {
             const decoded = await jwt.verify(token, this.tokenPassword);
+            return true;
+        } catch (err) {
+            return false;
+        }
+    }
+
+    async verifyTokenAdmin(token) {
+        try {
+            const decoded = await jwt.verify(token, this.tokenPasswordAdmin);
             return true;
         } catch (err) {
             return false;

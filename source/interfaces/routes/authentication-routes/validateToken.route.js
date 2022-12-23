@@ -1,6 +1,17 @@
+const TokenAdapter = require('../../../adapters/token-adapter');
+const tokenAdapter = new TokenAdapter()
+
 class ValidateToken {
     route(req,res) {
-        res.send("oi")
+        const { token } = req.body;
+
+        const verifyToken = tokenAdapter.verifyToken(token)
+
+        if(verifyToken) {
+            res.send({ "success": "token validated" });
+        } else {
+            res.send({"error": "invalid token"})
+        }
     }
 }
 

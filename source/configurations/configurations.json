@@ -3,7 +3,7 @@
         "host": "localhost",
         "user": "root",
         "password": "",
-        "database": "questions_system"
+        "database": "zyngo"
     },
     "email_connection": {
         "host": "definir",
@@ -15,6 +15,7 @@
         }
     },
     "token": {
-        "password": "F%J$qxLFn1S&!!8O1c7T*8Unhx%gGQS%AQZq*#FDvP4r#bE%Ey"
+        "password": "F%J$qxLFn1S&!!8O1c7T*8Unhx%gGQS%AQZq*#FDvP4r#bE%Ey",
+        "passwordAdmin": "pG$w1jFNJ7hQu!Bri%ZRvThkU93FlrI4z!zLsrNJ$jF7z6XmLp"
     }
 }
