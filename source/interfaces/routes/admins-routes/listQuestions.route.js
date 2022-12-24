@@ -1,6 +1,10 @@
+const DatabaseAdapter = require('../../../adapters/database-adapter')
+const databaseAdapter = new DatabaseAdapter()
+
 class ListQuestions {
-    route(req,res) {
-        res.send("oi")
+    async route(req,res) {
+        const questionList = await databaseAdapter.query("SELECT * FROM perguntas WHERE status = 0")
+        res.send({questionList})
     }
 }
 
