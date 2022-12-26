@@ -10,7 +10,7 @@ class ValidateAdmin {
     async route(req, res) {
         const { email, password } = req.body;
 
-        const selectUser = await databaseAdapter.query("SELECT senha,admin FROM pessoas WHERE email = ?",[email])
+        const selectUser = await databaseAdapter.query("SELECT password,isAdmin FROM users WHERE email = ?",[email])
 
         if (!selectUser[0]) {
             return res.status(200).send({ "error": "Please, register this user first" })

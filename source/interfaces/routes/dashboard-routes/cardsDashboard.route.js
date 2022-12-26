@@ -5,14 +5,14 @@ class DashboardCards {
     async route(req, res) {
         const { email } = req.body;
 
-        const getPontuation = await databaseAdapter.query("SELECT pontuacao FROM pessoas WHERE email = ?", [email])
+        const getPontuation = await databaseAdapter.query("SELECT pontuation FROM users WHERE email = ?", [email])
 
         if (getPontuation) {
-            const queryResult = await databaseAdapter.query("SELECT COUNT(codPessoa) + 1 AS posicao FROM pessoas WHERE pontuacao >  ? AND inativo = 0", getPontuation[0].pontuacao)
+            const queryResult = await databaseAdapter.query("SELECT COUNT(codUser) + 1 AS position FROM users WHERE pontuation > ? AND inactive = 0", getPontuation[0].pontuation)
             if (queryResult) {
                 res.send({
-                    pontuation: getPontuation[0].pontuacao,
-                    position: queryResult[0].posicao,
+                    pontuation: getPontuation[0].pontuation,
+                    position: queryResult[0].position,
                 });
             } else {
                 res.send({

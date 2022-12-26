@@ -6,7 +6,7 @@ class RemoveQuestion {
         const { id } = req.body;
 
         try{
-            await databaseAdapter.query("DELETE FROM perguntas WHERE codPergunta=?",[id])
+            await databaseAdapter.query("DELETE FROM questions WHERE codQuestion=?",[id])
             return res.send({success: "question removed"})
         } catch (error) {
             return res.send({error: "error in request"})

@@ -10,7 +10,7 @@ class Login {
     async route(req, res) {
         const { email, password } = req.body;
 
-        const selectUser = await databaseAdapter.query("SELECT nome,sobrenome,urlAvatar,senha,inativo FROM pessoas WHERE email = ?",[email])
+        const selectUser = await databaseAdapter.query("SELECT name,lastname,urlAvatar,password,inactive FROM users WHERE email = ?",[email])
 
         if (!selectUser[0]) {
             return res.status(200).send({ "error": "Please, register this user first" })
@@ -20,7 +20,7 @@ class Login {
             return res.status(200).send({ "error": "This user is inactive" })
         }
 
-        const comparePasswords = await cryptographyAdapter.comparePasswordAndHash(password, selectUser[0].senha)
+        const comparePasswords = await cryptographyAdapter.comparePasswordAndHash(password, selectUser[0].password)
         
         if(comparePasswords) {
             const token = await tokenAdapter.signToken({"email": email}, 3000)

@@ -4,17 +4,17 @@ const databaseAdapter = new DatabaseAdapter()
 class InsertQuestions {
     async route(req,res) {
         const {
-            pergunta,
-            opcaoA,
-            opcaoB,
-            opcaoC,
-            opcaoD,
-            dificuldade,
-            respostaCorreta,
+            question,
+            optionA,
+            optionB,
+            optionC,
+            optionD,
+            dificulty,
+            correctAnswer,
           } = req.body;
 
         try{
-            await databaseAdapter.query("INSERT INTO perguntas (pergunta,opcaoA,opcaoB,opcaoC,opcaoD,dificuldade,respostaCorreta) values (?, ?, ?, ?, ?, ?, ?)", [pergunta, opcaoA, opcaoB, opcaoC, opcaoD, dificuldade, respostaCorreta])
+            await databaseAdapter.query("INSERT INTO tests (question,optionA,optionB,opcaoC,optionD,dificulty,correctAnswer) values (?, ?, ?, ?, ?, ?, ?)", [question, optionA, optionB, optionC, optionD, dificulty, correctAnswer])
             return res.send({success: "quest added"})
         } catch (error) {
             return res.send({error: "error in request"})

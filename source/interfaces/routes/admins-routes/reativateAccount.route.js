@@ -3,7 +3,7 @@ class ReativateAccount {
         const { email } = req.body;
 
         try {
-            await databaseAdapter.query("UPDATE pessoas SET inativo = 0 WHERE email = ?",[email])
+            await databaseAdapter.query("UPDATE users SET inactive = 0 WHERE email = ?",[email])
             res.send({success:"account reativated"})
         } catch (error) {
             res.send({error:"error in request"})

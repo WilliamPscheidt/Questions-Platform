@@ -5,18 +5,18 @@ class UpdateQuestion {
     async route(req,res) {
         const {
             id,
-            pergunta,
-            opcaoA,
-            opcaoB,
-            opcaoC,
-            opcaoD,
-            dificuldade,
-            respostaCorreta,
+            question,
+            optionA,
+            optionB,
+            optionC,
+            optionD,
+            dificulty,
+            correctAnswer,
           } = req.body;
 
         try {
-            await databaseAdapter.query("INSERT INTO perguntas (pergunta,opcaoA,opcaoB,opcaoC,opcaoD,dificuldade,respostaCorreta) values (?, ?, ?, ?, ?, ?, ?)",[pergunta, opcaoA, opcaoB, opcaoC, opcaoD, dificuldade, respostaCorreta])
-            await databaseAdapter.query("UPDATE perguntas SET status = 1 WHERE codPergunta = ?",[id])
+            await databaseAdapter.query("INSERT INTO questions (question,optionA,optionB,optionC,optionD,dificulty,correctAnswer) values (?, ?, ?, ?, ?, ?, ?)",[question, optionA, optionB, optionC, optionD, dificulty, correctAnswer])
+            await databaseAdapter.query("UPDATE questions SET status = 1 WHERE codQuestion = ?",[id])
         } catch (error) {
            return  res.send({error:"error in request"})
         }    

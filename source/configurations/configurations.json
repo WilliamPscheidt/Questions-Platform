@@ -3,7 +3,7 @@
         "host": "localhost",
         "user": "root",
         "password": "",
-        "database": "zyngo"
+        "database": "questions"
     },
     "email_connection": {
         "host": "definir",

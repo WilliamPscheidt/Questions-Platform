@@ -5,7 +5,7 @@ class ViewQuestion {
     async route(req,res) {
         const { id } = req.body;
 
-        const question = await databaseAdapter.query("SELECT * FROM perguntas WHERE codPergunta = ?",[id])
+        const question = await databaseAdapter.query("SELECT * FROM questions WHERE codQuestion = ?",[id])
         res.send({question})
     }
 }

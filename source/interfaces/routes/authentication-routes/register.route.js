@@ -12,7 +12,7 @@ class Register {
     async route(req, res) {
         const { name, lastname, email, password } = req.body;
 
-        const searchAccounts = await databaseAdapter.query("SELECT * FROM pessoas WHERE email = ?",[email])
+        const searchAccounts = await databaseAdapter.query("SELECT * FROM users WHERE email = ?",[email])
 
         if (searchAccounts[0]) {
             return res.status(200).send({ "error": "User already registered"})
@@ -22,7 +22,7 @@ class Register {
         const hashedPassword = await cryptographyAdapter.encryptPassword(password)
 
         try {
-            await databaseAdapter.query("INSERT INTO pessoas (nome,sobrenome,email,senha, urlAvatar) values (?, ?, ?, ?, ?)", [name, lastname, email, hashedPassword, avatar])
+            await databaseAdapter.query("INSERT INTO users (name,lastname,email,password,urlAvatar) values (?, ?, ?, ?, ?)", [name, lastname, email, hashedPassword, avatar])
             res.send({
                 success: "User registered",
                 token: token,
